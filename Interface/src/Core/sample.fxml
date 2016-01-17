@@ -30,17 +30,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="table" layoutY="27.0" prefHeight="200.0" prefWidth="302.0">
+      <TableView layoutY="27.0" prefHeight="200.0" prefWidth="302.0">
         <columns>
-          <TableColumn fx:id="stColumn" prefWidth="75.0" text="Metodo 1" />
-          <TableColumn fx:id="ndColumn" prefWidth="75.0" text="Metodo 2" />
-            <TableColumn fx:id="ThirdthColumn" prefWidth="75.0" text="Metodo 3" />
-            <TableColumn fx:id="FourthColumn" prefWidth="75.0" text="Metodo 4" />
+          <TableColumn prefWidth="75.0" text="Metodo 1" />
+          <TableColumn prefWidth="75.0" text="Metodo 2" />
+            <TableColumn prefWidth="75.0" text="Metodo 3" />
+            <TableColumn prefWidth="75.0" text="Metodo 4" />
         </columns>
       </TableView>
-      <TextArea fx:id="textArea" layoutX="300.0" layoutY="27.0" prefHeight="373.0" prefWidth="308.0" />
-      <ChoiceBox fx:id="choiceSort" layoutX="76.0" layoutY="242.0" prefWidth="150.0" />
+      <TextArea layoutX="300.0" layoutY="27.0" prefHeight="373.0" prefWidth="308.0" />
+      <ChoiceBox layoutX="76.0" layoutY="242.0" prefWidth="150.0" />
       <Button layoutX="121.0" layoutY="287.0" mnemonicParsing="false" text="Ordenar" />
-      <ProgressIndicator fx:id="progressIn" layoutX="121.0" layoutY="329.0" prefHeight="57.0" prefWidth="60.0" progress="0.0" />
+      <ProgressIndicator layoutX="121.0" layoutY="329.0" prefHeight="57.0" prefWidth="60.0" progress="0.0" />
    </children>
 </AnchorPane>
