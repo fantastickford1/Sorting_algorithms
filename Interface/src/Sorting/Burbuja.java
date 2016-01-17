@@ -2,6 +2,9 @@ package Sorting;
 
 public class Burbuja{
 
+    int intercambios;
+    int iteraciones;
+
 	/*public static void main(String[] args) {
 		int[] array = {6,3,8,12,5,0,9,4};
 		Burbuja bur = new Burbuja();
@@ -19,9 +22,9 @@ public class Burbuja{
                       A[j+1]=A[j];
                       A[j]=aux;
                    }
-               }
-         	}
+              }
+         }
 
-         	return A;
+        return A;
 	}
 }
