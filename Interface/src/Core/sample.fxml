@@ -30,17 +30,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView layoutY="27.0" prefHeight="200.0" prefWidth="302.0">
+      <TableView fx:id="table" layoutY="27.0" prefHeight="200.0" prefWidth="418.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Metodo 1" />
-          <TableColumn prefWidth="75.0" text="Metodo 2" />
-            <TableColumn prefWidth="75.0" text="Metodo 3" />
-            <TableColumn prefWidth="75.0" text="Metodo 4" />
+          <TableColumn fx:id="tableColumnM" prefWidth="107.0" text="Metodo" />
+          <TableColumn fx:id="tableColumnOp" prefWidth="137.0" text="Operaciones Maximas" />
+            <TableColumn fx:id="tableColumnIt" prefWidth="78.0" text="Iteraciones" />
+            <TableColumn fx:id="tableColumnIn" minWidth="0.0" prefWidth="95.0" text="Intercambios" />
         </columns>
       </TableView>
-      <TextArea layoutX="300.0" layoutY="27.0" prefHeight="373.0" prefWidth="308.0" />
-      <ChoiceBox layoutX="76.0" layoutY="242.0" prefWidth="150.0" />
-      <Button layoutX="121.0" layoutY="287.0" mnemonicParsing="false" text="Ordenar" />
-      <ProgressIndicator layoutX="121.0" layoutY="329.0" prefHeight="57.0" prefWidth="60.0" progress="0.0" />
+      <TextArea fx:id="textarea" layoutX="419.0" layoutY="27.0" prefHeight="373.0" prefWidth="189.0" />
+      <ChoiceBox fx:id="choice" layoutX="151.0" layoutY="243.0" prefWidth="150.0" />
+      <Button layoutX="196.0" layoutY="287.0" mnemonicParsing="false" text="Ordenar" />
+      <ProgressIndicator layoutX="196.0" layoutY="329.0" prefHeight="57.0" prefWidth="60.0" progress="0.0" />
    </children>
 </AnchorPane>
