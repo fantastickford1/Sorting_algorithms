@@ -1,13 +1,11 @@
 # Sorting_algorithms
 Advance Data Structure Homework
 ## Instrucciones
-> Agregar codigo en la direccion Interface/*src*/
+> Agregar codigo en la direccion Interface/*src*/Core
 
 ##Updates
-> Lectura de un archivo .txt y almacenar en variable String.
+> Lectura de un archivo .txt correctamente y almacenar en un array de Ints.
+> Formulas de complejidad de los algoritmos.
 
 ##To do:
-> Leer archivo .txt de forma especial para uso de algortimos.
-
-##Things we have but are not added
-> Metodo para convertir a int lo leido por BufferedReader.
+> Llenar tabla
