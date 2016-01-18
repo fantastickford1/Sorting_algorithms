@@ -2,8 +2,8 @@ package Sorting;
 
 public class Burbuja{
 
-    int intercambios;
-    int iteraciones;
+    public int comparaciones = 0;
+    public int iteraciones;
 
 	/*public static void main(String[] args) {
 		int[] array = {6,3,8,12,5,0,9,4};
@@ -17,6 +17,7 @@ public class Burbuja{
          int i, j, aux;
          for(i=0;i<A.length-1;i++){
               for(j=0;j<A.length-i-1;j++){
+                  comparaciones++;
                    if(A[j+1]<A[j]){
                       aux=A[j+1];
                       A[j+1]=A[j];
@@ -24,7 +25,11 @@ public class Burbuja{
                    }
               }
          }
-
         return A;
 	}
+
+    public int getComparaciones(){
+        return this.comparaciones;
+    }
+
 }

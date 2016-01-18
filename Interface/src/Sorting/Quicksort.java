@@ -2,7 +2,7 @@ package Sorting;
 
 public class Quicksort{
 
-  int count = 0;
+  int comparaciones = 0;
 
   public void quickSort(int arr[], int left, int right) {
     int index = partition(arr, left, right);
@@ -17,11 +17,11 @@ public class Quicksort{
     int tmp;
     int pivot = arr[(left + right) / 2];
     while (i <= j) {
-      count++;
       while (arr[i] < pivot)
         i++;
       while (arr[j] > pivot)
         j--;
+      comparaciones++;
       if (i <= j) {
         tmp = arr[i];
         arr[i] = arr[j];
@@ -33,4 +33,7 @@ public class Quicksort{
     return i;
   }
 
+    public int getComparaciones() {
+        return this.comparaciones;
+    }
 }

@@ -3,6 +3,8 @@ package Sorting;
 import java.util.*;
 public class InsercionYSeleccion{
 
+    int comparaciones = 1;
+
     public void InsercionSort(int matriz[]){
         int i, temp, j;
 
@@ -11,6 +13,7 @@ public class InsercionYSeleccion{
             j = i-1;
 
             while ((matriz[j] >temp) && (j>= 0 )){
+                comparaciones++;
                 matriz[j + 1] = matriz[j];
                 j--;
             }
@@ -39,5 +42,7 @@ public class InsercionYSeleccion{
         }
     }
 
-
+    public int getComparaciones() {
+        return this.comparaciones;
+    }
 }

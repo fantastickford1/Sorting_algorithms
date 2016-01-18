@@ -3,7 +3,7 @@ package Sorting;
 
 import java.util.Arrays;
 public class Merge{
-	private int iteracciones = 0;
+	private int comparaciones = 0;
 
 	/*public static void main(String args[]){
 		int[] array = {6,3,8,12,5,0,9,4};
@@ -42,34 +42,28 @@ public class Merge{
 		int j = 0; //indece der
 		int index =0;
 		int[] resultado = new int[izq.length+der.length];
-		while(i<izq.length && j<der.length){ 
+		while(i<izq.length && j<der.length){
+			comparaciones++;
 			if(izq[i] < der[j]){
 				resultado[index++] = izq[i++];
 				//i++;
 			}else{
 				resultado[index++] = der[j++];
 			}
-			iteracciones++;
+
 		}
 		while( i<izq.length ){    // Copia el resto de la mitad izq
             resultado[ index++] = izq[ i++];
-            iteracciones++;
-
             
         }
         while( j<der.length){ //Copia el resto de la mitad der
             resultado[ index++] = der[ j++ ];
-            iteracciones++;
-
-           
         }
         return resultado;
-			
 	}
 
-	public void imprimir(){
-		System.out.println("Numero de iteracciones de merge: " +iteracciones);
+	public int getComparaciones() {
+		return this.comparaciones;
 	}
-	
 }
 
