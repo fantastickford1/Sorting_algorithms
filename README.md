@@ -6,6 +6,7 @@ Advance Data Structure Homework
 ##Updates
 * Lectura de un archivo .txt correctamente y almacenar en un array de Ints
 * Formulas de complejidad de los algoritmos
+* Ya se puede rellenar la tabla
 
 ##To do:
-> Llenar tabla
+> Llenar espacios faltantes de la tabla
