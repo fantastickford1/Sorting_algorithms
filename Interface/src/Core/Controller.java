@@ -9,7 +9,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -26,20 +25,21 @@ public class Controller implements Initializable {
     @FXML
     private ChoiceBox<String> choice;
 
+
     private TableColumn metd, comp, compR, iter, iterR;
 
     //Sorting objects//
     Burbuja bubble;
     Merge mergeSort;
     InsercionYSeleccion insertion;
-    Quicksort quicksort;
+    Quicksort quickSort;
     //Objects//
     FileChooser fileChooser;
     File file;
     FileReader fr;
     BufferedReader br;
     Stage stage;
-    ObservableList<AlphaData> datas;
+    ObservableList<AlphaData> datas = FXCollections.observableArrayList();
     AlphaData burbujaData;
     AlphaData insercionData;
     AlphaData mergeData;
@@ -52,6 +52,9 @@ public class Controller implements Initializable {
     boolean bandera;
     int[] allInt;
     int[] allIntOrder;
+
+    double burbuja,merge,quicksort,insercion;
+    double insercionIter,burbujaIter,quicksortIter,mergeIter;
 
     private boolean ordenamiento(int[] array){
 
@@ -112,17 +115,17 @@ public class Controller implements Initializable {
 
     private void complex(){
         ////////////////////////////////Comparaciones//////////////////////////////////////
-        double burbuja = (Math.pow(allInt.length,2)-allInt.length)/2;
+        burbuja = (Math.pow(allInt.length,2)-allInt.length)/2;
         //double insercion = (Math.pow(allInt.length, 2) - allInt.length) / 4;
         //double merge = allInt.length * (Math.log(allInt.length));
-        double merge = allInt.length * (Math.log(allInt.length) / Math.log(2));
-        double quicksort = allInt.length * (Math.log(allInt.length));
-        double insercion=0;
+        merge = allInt.length * (Math.log(allInt.length) / Math.log(2));
+        quicksort = allInt.length * (Math.log(allInt.length));
+        insercion=0;
         ////////////////////////////////////Intercambios////////////////////////////////
-        double insercionIter = 0;
-        double burbujaIter = 0;
-        double quicksortIter = Math.pow(allInt.length,2); //allInt.length * (Math.log(allInt.length)); //Peor caso
-        double mergeIter =  allInt.length * (Math.log(allInt.length) / Math.log(2));
+        insercionIter = 0;
+        burbujaIter = 0;
+        quicksortIter = Math.pow(allInt.length,2); //allInt.length * (Math.log(allInt.length)); //Peor caso
+        mergeIter =  allInt.length * (Math.log(allInt.length) / Math.log(2));
         ////////////////////////////////////////////////////////////////////
 
         if(bandera) {//ES EL MEJOR CASO ORDENADO
@@ -138,12 +141,12 @@ public class Controller implements Initializable {
         }
 
 
-        burbujaData = new AlphaData("Burbuja",burbuja,0,burbujaIter,0);
-        insercionData = new AlphaData("Insercion",insercion,0,insercionIter,0);
-        mergeData = new AlphaData("Merge",merge,0,mergeIter,0);
-        quickData = new AlphaData("Quicksort",quicksort,0,quicksortIter,0);
+        //burbujaData = new AlphaData("Burbuja",burbuja,0,burbujaIter,0);
+        //insercionData = new AlphaData("Insercion",insercion,0,insercionIter,0);
+        //mergeData = new AlphaData("Merge",merge,0,mergeIter,0);
+        //quickData = new AlphaData("Quicksort", quicksort,0,quicksortIter,0);
 
-
+        /*
         datas = FXCollections.observableArrayList(
                 burbujaData, insercionData,mergeData,quickData
         );
@@ -165,7 +168,7 @@ public class Controller implements Initializable {
         );
 
         table.setItems(datas);
-
+        */
     }
 
     @FXML private void sort(){
@@ -176,13 +179,14 @@ public class Controller implements Initializable {
 
         bubble = new Burbuja();
         insertion = new InsercionYSeleccion();
-        quicksort = new Quicksort();
+        quickSort = new Quicksort();
         mergeSort = new Merge();
 
         if(choice.getValue() == "Burbuja"){
             bubble.burbuja(allIntOrder);
             comparacionesR = bubble.getComparaciones();
-            burbujaData.setComparacionesReales(comparacionesR);
+            //burbujaData.setComparacionesReales(comparacionesR);
+            datas.addAll(new AlphaData("Burbuja",burbuja,comparacionesR,burbujaIter,bubble.getIntercambios()));
             System.out.println("Comparaciones de Burbuja: "+comparacionesR);
             System.out.println("Intercambios de burbuja: " +bubble.getIntercambios());
         }
@@ -191,6 +195,7 @@ public class Controller implements Initializable {
             allIntOrder = insertion.ordenarInsercion(allIntOrder);
             comparacionesR = insertion.getComparaciones();
             insercionData.setComparacionesReales(comparacionesR);
+            datas.addAll(new AlphaData("Insercion",insercion,comparacionesR,insercionIter,insertion.getIntercambios()));
             System.out.println("Comparaciones de Insercion: "+comparacionesR);
             System.out.println("Intercambios de Insercion: " +insertion.getIntercambios());
         }
@@ -198,20 +203,22 @@ public class Controller implements Initializable {
             allIntOrder=mergeSort.merge_sort(allIntOrder);
             comparacionesR = mergeSort.getComparaciones();
             mergeData.setComparacionesReales(comparacionesR);
+            datas.addAll()
             System.out.println("Comparaciones de Merge: "+comparacionesR);
             System.out.println("Intercambios de Merge: " +mergeSort.getIntercambios());
 
         }
         if(choice.getValue() == "Quicksort"){
-            quicksort.quickSort(allIntOrder,0,allData.length-1);
-            comparacionesR = quicksort.getComparaciones();
+            quickSort.quickSort(allIntOrder,0,allData.length-1);
+            comparacionesR = quickSort.getComparaciones();
             quickData.setComparacionesReales(comparacionesR);
             System.out.println("Comparaciones de QuickSOrt: "+comparacionesR);
-            System.out.println("Intercambios de QuickSort " +quicksort.getIntercambios());
+            System.out.println("Intercambios de QuickSort " + quickSort.getIntercambios());
 
         }
 
         //////////////////////////////////////////////////////////
+        /*
         table.getItems().clear();
         datas.removeAll();
 
@@ -236,7 +243,7 @@ public class Controller implements Initializable {
         );
 
         table.setItems(datas);
-
+        */
         ////////////////////////////////////////////////////////
 
 
@@ -248,6 +255,9 @@ public class Controller implements Initializable {
 
     }
 
+    private void updateTable(){
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         choice.getItems().addAll("Burbuja","Insercion","Merge","Quicksort");
@@ -259,7 +269,7 @@ public class Controller implements Initializable {
         iterR = new TableColumn("No. Intercambios Reales");
 
 
-        table.getColumns().addAll(metd, comp, compR, iter, iterR);
+        //table.getColumns().addAll(metd, comp, compR, iter, iterR);
     }
 
 }

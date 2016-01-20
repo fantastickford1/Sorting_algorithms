@@ -3,6 +3,7 @@ package Core;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Created by Karlos on 1/18/2016.
@@ -47,5 +48,7 @@ public class AlphaData {
 
     public void setIntercambiosReales(int iteracionesReales){ this.intercambiosR.set(iteracionesReales);}
     public int getIntercambiosReales(){ return this.intercambiosR.get();}
+
+
 
 }
