@@ -10,44 +10,59 @@ import javafx.beans.property.StringProperty;
  */
 public class AlphaData {
 
-    public SimpleStringProperty metod;
-    public SimpleDoubleProperty comparaciones;
-    public SimpleIntegerProperty comparacionesR;
-    public SimpleDoubleProperty intercambios;
-    public SimpleIntegerProperty intercambiosR;
+    public String getMetod() {
+        return metod.get();
+    }
+
+    public StringProperty metodProperty() {
+        return metod;
+    }
+
+    public String getComparaciones() {
+        return comparaciones.get();
+    }
+
+    public StringProperty comparacionesProperty() {
+        return comparaciones;
+    }
+
+    public String getComparacionesR() {
+        return comparacionesR.get();
+    }
+
+    public StringProperty comparacionesRProperty() {
+        return comparacionesR;
+    }
+
+    public String getIntercambios() {
+        return intercambios.get();
+    }
+
+    public StringProperty intercambiosProperty() {
+        return intercambios;
+    }
+
+    public String getIntercambiosR() {
+        return intercambiosR.get();
+    }
+
+    public StringProperty intercambiosRProperty() {
+        return intercambiosR;
+    }
+
+    public StringProperty metod;
+    public StringProperty comparaciones;
+    public StringProperty comparacionesR;
+    public StringProperty intercambios;
+    public StringProperty intercambiosR;
 
     public AlphaData(String metod,double comp,int compR, double iter, int iterR){
         this.metod = new SimpleStringProperty(metod);
-        this.comparaciones = new SimpleDoubleProperty(comp);
-        this.comparacionesR = new SimpleIntegerProperty(compR);
-        this.intercambios = new SimpleDoubleProperty(iter);
-        this.intercambiosR = new SimpleIntegerProperty(iterR);
+        this.comparaciones = new SimpleStringProperty(""+comp);
+        this.comparacionesR = new SimpleStringProperty(""+compR);
+        this.intercambios = new SimpleStringProperty(""+iter);
+        this.intercambiosR = new SimpleStringProperty(""+iterR);
     }
-
-    public void setMetod(String name){
-        this.metod.set(name);
-    }
-    public String getMetod(){
-        return this.metod.get();
-    }
-
-    public void setComparaciones(double comparaciones){
-        this.comparaciones.set(comparaciones);
-    }
-    public double getComparaciones(){
-        return this.comparaciones.get();
-    }
-
-    public void setComparacionesReales(int compR){ this.comparacionesR.set(compR);}
-    public int getComparacionesReales(){ return this.comparacionesR.get();}
-
-    public void setIntercambios(int intercambios){ this.intercambios.set(intercambios);}
-    public double getIntercambios(){
-        return this.intercambios.get();
-    }
-
-    public void setIntercambiosReales(int iteracionesReales){ this.intercambiosR.set(iteracionesReales);}
-    public int getIntercambiosReales(){ return this.intercambiosR.get();}
 
 
 

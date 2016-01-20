@@ -18,12 +18,14 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML
-    private TextArea textarea;
-    @FXML
-    private TableView table;
-    @FXML
-    private ChoiceBox<String> choice;
+    @FXML private TextArea textarea;
+    @FXML private TableView table;
+    @FXML private ChoiceBox<String> choice;
+    @FXML TableColumn<AlphaData,String> columnMetodo;
+    @FXML TableColumn<AlphaData,String> columnIntercambios;
+    @FXML TableColumn<AlphaData,String> columnIntercambiosReales;
+    @FXML TableColumn<AlphaData,String> columnComparaciones;
+    @FXML TableColumn<AlphaData,String> columnComparacionesReales;
 
 
     private TableColumn metd, comp, compR, iter, iterR;
@@ -123,7 +125,7 @@ public class Controller implements Initializable {
         insercion=0;
         ////////////////////////////////////Intercambios////////////////////////////////
         insercionIter = 0;
-        burbujaIter = 0;
+        burbujaIter = Math.pow(allInt.length,2)/8;
         quicksortIter = Math.pow(allInt.length,2); //allInt.length * (Math.log(allInt.length)); //Peor caso
         mergeIter =  allInt.length * (Math.log(allInt.length) / Math.log(2));
         ////////////////////////////////////////////////////////////////////
@@ -131,8 +133,9 @@ public class Controller implements Initializable {
         if(bandera) {//ES EL MEJOR CASO ORDENADO
             insercionIter = 0;
             //mergeIter=0;
+            burbujaIter=0;
             quicksortIter = allInt.length;
-            burbujaIter = 0;
+
             insercion =allInt.length;
 
         }else{// PERO CASO ORDENADO ARBITRARIAMENTE O INVERSAMENTE
@@ -141,38 +144,22 @@ public class Controller implements Initializable {
         }
 
 
-        //burbujaData = new AlphaData("Burbuja",burbuja,0,burbujaIter,0);
-        //insercionData = new AlphaData("Insercion",insercion,0,insercionIter,0);
-        //mergeData = new AlphaData("Merge",merge,0,mergeIter,0);
-        //quickData = new AlphaData("Quicksort", quicksort,0,quicksortIter,0);
+        datas.addAll(new AlphaData("Burbuja",burbuja,0,burbujaIter,0));
+        datas.addAll(new AlphaData("Insercion",insercion,0,insercionIter,0));
+        datas.addAll(new AlphaData("Merge",merge,0,mergeIter,0));
+        datas.addAll(new AlphaData("Quicksort",quicksort,0,quicksortIter,0));
 
-        /*
-        datas = FXCollections.observableArrayList(
-                burbujaData, insercionData,mergeData,quickData
-        );
-
-        metd.setCellValueFactory(
-                new PropertyValueFactory<>("metod")
-        );
-        comp.setCellValueFactory(
-                new PropertyValueFactory<>("comparaciones")
-        );
-        compR.setCellValueFactory(
-                new PropertyValueFactory<>("comparacionesR")
-        );
-        iter.setCellValueFactory(
-                new PropertyValueFactory<>("intercambios")
-        );
-        iterR.setCellValueFactory(
-                new PropertyValueFactory<>("intercambiosR")
-        );
-
+        columnMetodo.setCellValueFactory(cellData -> cellData.getValue().metodProperty());
+        columnComparaciones.setCellValueFactory(cellData -> cellData.getValue().comparacionesProperty());
+        columnComparacionesReales.setCellValueFactory(cellData -> cellData.getValue().comparacionesRProperty());
+        columnIntercambios.setCellValueFactory(cellData -> cellData.getValue().intercambiosProperty());
+        columnIntercambiosReales.setCellValueFactory(cellData -> cellData.getValue().intercambiosRProperty());
         table.setItems(datas);
-        */
+
+
     }
 
     @FXML private void sort(){
-
         allIntOrder = allInt;
 
         int comparacionesR = 0;
@@ -194,7 +181,7 @@ public class Controller implements Initializable {
             //insertion.InsercionSort(allInt);
             allIntOrder = insertion.ordenarInsercion(allIntOrder);
             comparacionesR = insertion.getComparaciones();
-            insercionData.setComparacionesReales(comparacionesR);
+            //insercionData.setComparacionesReales(comparacionesR);
             datas.addAll(new AlphaData("Insercion",insercion,comparacionesR,insercionIter,insertion.getIntercambios()));
             System.out.println("Comparaciones de Insercion: "+comparacionesR);
             System.out.println("Intercambios de Insercion: " +insertion.getIntercambios());
@@ -202,8 +189,8 @@ public class Controller implements Initializable {
         if(choice.getValue() == "Merge"){
             allIntOrder=mergeSort.merge_sort(allIntOrder);
             comparacionesR = mergeSort.getComparaciones();
-            mergeData.setComparacionesReales(comparacionesR);
-            datas.addAll()
+            //mergeData.setComparacionesReales(comparacionesR);
+            datas.addAll(new AlphaData("Merge",merge,comparacionesR,mergeIter,mergeSort.getIntercambios()));
             System.out.println("Comparaciones de Merge: "+comparacionesR);
             System.out.println("Intercambios de Merge: " +mergeSort.getIntercambios());
 
@@ -211,41 +198,12 @@ public class Controller implements Initializable {
         if(choice.getValue() == "Quicksort"){
             quickSort.quickSort(allIntOrder,0,allData.length-1);
             comparacionesR = quickSort.getComparaciones();
-            quickData.setComparacionesReales(comparacionesR);
+            //quickData.setComparacionesReales(comparacionesR);
+            datas.addAll(new AlphaData("Quicksort",quicksort,comparacionesR,quicksortIter,quickSort.getIntercambios()));
             System.out.println("Comparaciones de QuickSOrt: "+comparacionesR);
             System.out.println("Intercambios de QuickSort " + quickSort.getIntercambios());
 
         }
-
-        //////////////////////////////////////////////////////////
-        /*
-        table.getItems().clear();
-        datas.removeAll();
-
-        datas = FXCollections.observableArrayList(
-                burbujaData, insercionData,mergeData,quickData
-        );
-
-        metd.setCellValueFactory(
-                new PropertyValueFactory<>("metod")
-        );
-        comp.setCellValueFactory(
-                new PropertyValueFactory<>("comparaciones")
-        );
-        compR.setCellValueFactory(
-                new PropertyValueFactory<>("comparacionesR")
-        );
-        iter.setCellValueFactory(
-                new PropertyValueFactory<>("intercambios")
-        );
-        iterR.setCellValueFactory(
-                new PropertyValueFactory<>("intercambiosR")
-        );
-
-        table.setItems(datas);
-        */
-        ////////////////////////////////////////////////////////
-
 
 
         textarea.setText("");
@@ -253,21 +211,34 @@ public class Controller implements Initializable {
             textarea.appendText(String.valueOf(w) + "\n");
         }
 
+        updateTable();
+
     }
 
     private void updateTable(){
+        clearTable();
+
+        columnMetodo.setCellValueFactory(cellData -> cellData.getValue().metodProperty());
+        columnComparaciones.setCellValueFactory(cellData -> cellData.getValue().comparacionesProperty());
+        columnComparacionesReales.setCellValueFactory(cellData -> cellData.getValue().comparacionesRProperty());
+        columnIntercambios.setCellValueFactory(cellData -> cellData.getValue().intercambiosProperty());
+        columnIntercambiosReales.setCellValueFactory(cellData -> cellData.getValue().intercambiosRProperty());
+
+        table.setItems(datas);
 
     }
+
+    private boolean clearTable(){
+        datas.removeAll();
+        table.setItems(datas);
+
+        return true;
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         choice.getItems().addAll("Burbuja","Insercion","Merge","Quicksort");
-
-        metd = new TableColumn("Métodos");
-        comp = new TableColumn("No.Comparaciones(Fórmula)");
-        compR = new TableColumn("No. Comparaciones Reales");
-        iter = new TableColumn("No. Intercambios(Fórmula)");
-        iterR = new TableColumn("No. Intercambios Reales");
-
 
         //table.getColumns().addAll(metd, comp, compR, iter, iterR);
     }
