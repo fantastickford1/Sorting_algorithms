@@ -4,6 +4,7 @@ public class Burbuja{
 
     public int comparaciones = 0;
     public int iteraciones;
+    long TInicio, TFin, tiempo;
 
 	/*public static void main(String[] args) {
 		int[] array = {6,3,8,12,5,0,9,4};
@@ -14,6 +15,7 @@ public class Burbuja{
 	}*/
 
 	public int[] burbuja(int [] A){
+        TInicio = System.currentTimeMillis();
          int i, j, aux;
          for(i=0;i<A.length-1;i++){
               for(j=0;j<A.length-i-1;j++){
@@ -25,6 +27,8 @@ public class Burbuja{
                    }
               }
          }
+        TFin = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
         return A;
 	}
 

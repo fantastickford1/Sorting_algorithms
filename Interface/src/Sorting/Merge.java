@@ -4,6 +4,7 @@ package Sorting;
 import java.util.Arrays;
 public class Merge{
 	private int comparaciones = 0;
+	long TInicio, TFin, tiempo;
 
 	/*public static void main(String args[]){
 		int[] array = {6,3,8,12,5,0,9,4};
@@ -16,6 +17,8 @@ public class Merge{
 
 	public int[] merge_sort(int[] arreglo){
 		//Si lista esta vacía o de tamaño 1 ya está ordenada. Se devuelve lista tal cual
+		TInicio = System.currentTimeMillis();
+
 		if(arreglo.length <= 1){
 			return arreglo;
 		}else{
@@ -33,6 +36,8 @@ public class Merge{
 			}
 			int[] izq = merge_sort(tempA);
 			int[] der = merge_sort(tempB);
+			TFin = System.currentTimeMillis();
+			System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
 			return merge(izq, der);
 		}
 	}

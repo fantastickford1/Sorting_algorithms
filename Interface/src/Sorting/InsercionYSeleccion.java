@@ -4,8 +4,10 @@ import java.util.*;
 public class InsercionYSeleccion{
 
     int comparaciones = 1;
+    long TInicio, TFin, tiempo;
 
     public void InsercionSort(int matriz[]){
+        TInicio = System.currentTimeMillis();
         int i, temp, j;
 
         for (i= 1; i < matriz.length; i++){
@@ -20,9 +22,13 @@ public class InsercionYSeleccion{
 
             matriz[j + 1] = temp;
         }
+
+        TFin = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
     }
 
     public void SeleccionSort(int[] matriz){
+        TInicio = System.currentTimeMillis();
         int i, j, k, p, buffer, limit = matriz.length-1;
 
         for (k = 0; k <= limit; k++){
@@ -40,6 +46,9 @@ public class InsercionYSeleccion{
                 matriz[k] = buffer;
             }
         }
+
+        TFin = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);
     }
 
     public int getComparaciones() {
