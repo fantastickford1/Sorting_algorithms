@@ -51,6 +51,7 @@ public class Controller implements Initializable {
     String[] allData;
     boolean bandera;
     int[] allInt;
+    int[] allIntOrder;
 
     private boolean ordenamiento(int[] array){
 
@@ -158,6 +159,8 @@ public class Controller implements Initializable {
 
     @FXML private void sort(){
 
+        allIntOrder = allInt;
+
         int comparacionesR = 0;
 
         bubble = new Burbuja();
@@ -167,7 +170,7 @@ public class Controller implements Initializable {
 
         if(choice.getValue() == "Burbuja"){
             double ini = System.currentTimeMillis(),Tiempo,fin;
-            bubble.burbuja(allInt);
+            bubble.burbuja(allIntOrder);
             comparacionesR = bubble.getComparaciones();
             burbujaData.setComparacionesReales(comparacionesR);
             fin = System.currentTimeMillis();
@@ -178,7 +181,7 @@ public class Controller implements Initializable {
         if(choice.getValue() == "Insercion"){
             //insertion.InsercionSort(allInt);
             double ini = System.currentTimeMillis(),Tiempo,fin;
-            allInt= insertion.ordenarInsercion(allInt);
+            allIntOrder = insertion.ordenarInsercion(allIntOrder);
             comparacionesR = insertion.getComparaciones();
             insercionData.setComparacionesReales(comparacionesR);
             fin = System.currentTimeMillis();
@@ -188,7 +191,7 @@ public class Controller implements Initializable {
         }
         if(choice.getValue() == "Merge"){
             double ini = System.currentTimeMillis(),Tiempo,fin;
-            allInt=mergeSort.merge_sort(allInt);
+            allIntOrder=mergeSort.merge_sort(allIntOrder);
             comparacionesR = mergeSort.getComparaciones();
             mergeData.setComparacionesReales(comparacionesR);
             fin = System.currentTimeMillis();
@@ -198,7 +201,7 @@ public class Controller implements Initializable {
         }
         if(choice.getValue() == "Quicksort"){
             double ini = System.currentTimeMillis(),Tiempo,fin;
-            quicksort.quickSort(allInt,0,allData.length-1);
+            quicksort.quickSort(allIntOrder,0,allData.length-1);
             comparacionesR = quicksort.getComparaciones();
             quickData.setComparacionesReales(comparacionesR);
             fin = System.currentTimeMillis();
@@ -207,10 +210,38 @@ public class Controller implements Initializable {
             System.out.println("Tiempo que tomo en ordenar QuickSort: " + Tiempo);
         }
 
+        //////////////////////////////////////////////////////////
+        table.getItems().clear();
+        datas.removeAll();
+
+        datas = FXCollections.observableArrayList(
+                burbujaData, insercionData,mergeData,quickData
+        );
+
+        metd.setCellValueFactory(
+                new PropertyValueFactory<>("metod")
+        );
+        comp.setCellValueFactory(
+                new PropertyValueFactory<>("comparaciones")
+        );
+        compR.setCellValueFactory(
+                new PropertyValueFactory<>("comparacionesR")
+        );
+        iter.setCellValueFactory(
+                new PropertyValueFactory<>("iteraciones")
+        );
+        iterR.setCellValueFactory(
+                new PropertyValueFactory<>("iteracionesR")
+        );
+
+        table.setItems(datas);
+
+        ////////////////////////////////////////////////////////
+
 
 
         textarea.setText("");
-        for (int w: allInt) {
+        for (int w: allIntOrder) {
             textarea.appendText(String.valueOf(w) + "\n");
         }
 
