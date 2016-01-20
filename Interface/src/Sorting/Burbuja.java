@@ -6,14 +6,6 @@ public class Burbuja{
     public int iteraciones;
     long TInicio, TFin, tiempo;
 
-	/*public static void main(String[] args) {
-		int[] array = {6,3,8,12,5,0,9,4};
-		Burbuja bur = new Burbuja();
-		int[] array2= bur.burbuja(array);;
-		for(int i=0;i<array2.length;i++)
-			System.out.println(array2[i]);
-	}*/
-
 	public int[] burbuja(int [] A){
         TInicio = System.currentTimeMillis();
          int i, j, aux;
