@@ -4,6 +4,7 @@ package Sorting;
 import java.util.Arrays;
 public class Merge{
 	private int comparaciones = 0;
+	int intercambios=0;
 	long TInicio, TFin, tiempo;
 
 
@@ -42,6 +43,7 @@ public class Merge{
 		int[] resultado = new int[izq.length+der.length];
 		while(i<izq.length && j<der.length){
 
+			intercambios++;
 			if(izq[i] < der[j]){
 				resultado[index++] = izq[i++];
 				//i++;
@@ -53,10 +55,12 @@ public class Merge{
 		while( i<izq.length ){    // Copia el resto de la mitad izq
 			resultado[ index++] = izq[ i++];
 			comparaciones++;
+			intercambios++;
 		}
 		while( j<der.length){ //Copia el resto de la mitad der
 			resultado[ index++] = der[ j++ ];
 			comparaciones++;
+			intercambios++;
 		}
 		return resultado;
 
@@ -64,6 +68,10 @@ public class Merge{
 
 
 	public int getComparaciones() {
+		return this.comparaciones;
+	}
+
+	public int getIntercambios(){
 		return this.comparaciones;
 	}
 }

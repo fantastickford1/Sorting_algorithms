@@ -3,7 +3,7 @@ package Sorting;
 public class Burbuja{
 
     public int comparaciones = 0;
-    public int iteraciones;
+    public int intercambios=0;
     long TInicio, TFin, tiempo;
 
 	public int[] burbuja(int [] A){
@@ -13,6 +13,7 @@ public class Burbuja{
               for(j=0;j<A.length-i-1;j++){
                   comparaciones++;
                    if(A[j+1]<A[j]){
+                       intercambios++;
                       aux=A[j+1];
                       A[j+1]=A[j];
                       A[j]=aux;
@@ -26,6 +27,10 @@ public class Burbuja{
 
     public int getComparaciones(){
         return this.comparaciones;
+    }
+
+    public int getIntercambios(){
+        return this.intercambios;
     }
 
 }

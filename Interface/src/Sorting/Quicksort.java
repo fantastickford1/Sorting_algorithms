@@ -3,6 +3,7 @@ package Sorting;
 public class Quicksort{
 
   int comparaciones = 0;
+  int intercambios=0;
   long TInicio, TFin, tiempo;
 
   public void quickSort(int arr[], int left, int right) {
@@ -27,6 +28,7 @@ public class Quicksort{
         j--;
       comparaciones++;
       if (i <= j) {
+        intercambios++;
         tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
@@ -40,4 +42,8 @@ public class Quicksort{
     public int getComparaciones() {
         return this.comparaciones;
     }
+
+  public  int getIntercambios(){
+    return this.intercambios;
+  }
 }

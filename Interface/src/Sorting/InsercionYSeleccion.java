@@ -4,6 +4,7 @@ import java.util.*;
 public class InsercionYSeleccion{
 
     int comparaciones = 1;
+    int intercambios=0;
     long TInicio, TFin, tiempo;
 
     public int[] ordenarInsercion(int[] array) {
@@ -17,6 +18,7 @@ public class InsercionYSeleccion{
             while (j > 0 && array[j - 1] > aux) {
                 comparaciones++;
                 array[j] = array[j - 1];
+                intercambios++;
                 j = j - 1;
                 array[j] = aux;
             }
@@ -31,5 +33,9 @@ public class InsercionYSeleccion{
 
     public int getComparaciones() {
         return this.comparaciones;
+    }
+
+    public int getIntercambios(){
+        return this.intercambios;
     }
 }

@@ -111,26 +111,33 @@ public class Controller implements Initializable {
     }
 
     private void complex(){
+        ////////////////////////////////Comparaciones//////////////////////////////////////
         double burbuja = (Math.pow(allInt.length,2)-allInt.length)/2;
         //double insercion = (Math.pow(allInt.length, 2) - allInt.length) / 4;
         //double merge = allInt.length * (Math.log(allInt.length));
         double merge = allInt.length * (Math.log(allInt.length) / Math.log(2));
         double quicksort = allInt.length * (Math.log(allInt.length));
         double insercion=0;
+        ////////////////////////////////////Intercambios////////////////////////////////
+        double insercionIter = 0;
+        double quicksortIter = Math.pow(allInt.length,2); //allInt.length * (Math.log(allInt.length)); //Peor caso
+        double mergeIter = allInt.length * (Math.log(allInt.length));
+        ////////////////////////////////////////////////////////////////////
 
         if(bandera) {//ES EL MEJOR CASO ORDENADO
-
+            insercionIter = allInt.length;
             insercion =allInt.length;
 
         }else{// PERO CASO ORDENADO ARBITRARIAMENTE O INVERSAMENTE
             insercion = (Math.pow(allInt.length,2))/4;
+            insercionIter = (Math.pow(allInt.length,2))/8;
         }
 
 
-        burbujaData = new AlphaData("Burbuja",burbuja,0,.0,0);
-        insercionData = new AlphaData("Insercion",insercion,0,.0,0);
-        mergeData = new AlphaData("Merge",merge,0,.0,0);
-        quickData = new AlphaData("Quicksort",quicksort,0,.0,0);
+        burbujaData = new AlphaData("Burbuja",burbuja,0,burbuja,0);
+        insercionData = new AlphaData("Insercion",insercion,0,insercionIter,0);
+        mergeData = new AlphaData("Merge",merge,0,mergeIter,0);
+        quickData = new AlphaData("Quicksort",quicksort,0,quicksortIter,0);
 
 
         datas = FXCollections.observableArrayList(
@@ -147,10 +154,10 @@ public class Controller implements Initializable {
                 new PropertyValueFactory<>("comparacionesR")
         );
         iter.setCellValueFactory(
-                new PropertyValueFactory<>("iteraciones")
+                new PropertyValueFactory<>("intercambios")
         );
         iterR.setCellValueFactory(
-                new PropertyValueFactory<>("iteracionesR")
+                new PropertyValueFactory<>("intercambiosR")
         );
 
         table.setItems(datas);
@@ -169,45 +176,35 @@ public class Controller implements Initializable {
         mergeSort = new Merge();
 
         if(choice.getValue() == "Burbuja"){
-            double ini = System.currentTimeMillis(),Tiempo,fin;
             bubble.burbuja(allIntOrder);
             comparacionesR = bubble.getComparaciones();
             burbujaData.setComparacionesReales(comparacionesR);
-            fin = System.currentTimeMillis();
-            Tiempo = fin - ini;
             System.out.println("Comparaciones de Burbuja: "+comparacionesR);
-            System.out.println("Tiempo que tomo en ordenar Burbuja: " +Tiempo);
+            System.out.println("Intercambios de burbuja: " +bubble.getIntercambios());
         }
         if(choice.getValue() == "Insercion"){
             //insertion.InsercionSort(allInt);
-            double ini = System.currentTimeMillis(),Tiempo,fin;
             allIntOrder = insertion.ordenarInsercion(allIntOrder);
             comparacionesR = insertion.getComparaciones();
             insercionData.setComparacionesReales(comparacionesR);
-            fin = System.currentTimeMillis();
-            Tiempo = fin - ini;
             System.out.println("Comparaciones de Insercion: "+comparacionesR);
-            System.out.println("Tiempo que tomo en ordenar Inserccion: "+ Tiempo);
+            System.out.println("Intercambios de Insercion: " +insertion.getIntercambios());
         }
         if(choice.getValue() == "Merge"){
-            double ini = System.currentTimeMillis(),Tiempo,fin;
             allIntOrder=mergeSort.merge_sort(allIntOrder);
             comparacionesR = mergeSort.getComparaciones();
             mergeData.setComparacionesReales(comparacionesR);
-            fin = System.currentTimeMillis();
-            Tiempo = fin - ini;
             System.out.println("Comparaciones de Merge: "+comparacionesR);
-            System.out.println("Tiempo que tomo en ordenar QuickSort: " + Tiempo);
+            System.out.println("Intercambios de Merge: " +mergeSort.getIntercambios());
+
         }
         if(choice.getValue() == "Quicksort"){
-            double ini = System.currentTimeMillis(),Tiempo,fin;
             quicksort.quickSort(allIntOrder,0,allData.length-1);
             comparacionesR = quicksort.getComparaciones();
             quickData.setComparacionesReales(comparacionesR);
-            fin = System.currentTimeMillis();
-            Tiempo = fin - ini;
             System.out.println("Comparaciones de QuickSOrt: "+comparacionesR);
-            System.out.println("Tiempo que tomo en ordenar QuickSort: " + Tiempo);
+            System.out.println("Intercambios de QuickSort " +quicksort.getIntercambios());
+
         }
 
         //////////////////////////////////////////////////////////
@@ -228,10 +225,10 @@ public class Controller implements Initializable {
                 new PropertyValueFactory<>("comparacionesR")
         );
         iter.setCellValueFactory(
-                new PropertyValueFactory<>("iteraciones")
+                new PropertyValueFactory<>("intercambios")
         );
         iterR.setCellValueFactory(
-                new PropertyValueFactory<>("iteracionesR")
+                new PropertyValueFactory<>("intercambiosR")
         );
 
         table.setItems(datas);
@@ -254,8 +251,8 @@ public class Controller implements Initializable {
         metd = new TableColumn("Métodos");
         comp = new TableColumn("No.Comparaciones(Fórmula)");
         compR = new TableColumn("No. Comparaciones Reales");
-        iter = new TableColumn("No. Iteraciones(Fórmula)");
-        iterR = new TableColumn("No. Iteraciones Reales");
+        iter = new TableColumn("No. Intercambios(Fórmula)");
+        iterR = new TableColumn("No. Intercambios Reales");
 
 
         table.getColumns().addAll(metd, comp, compR, iter, iterR);
