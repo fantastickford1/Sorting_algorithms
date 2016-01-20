@@ -120,12 +120,16 @@ public class Controller implements Initializable {
         double insercion=0;
         ////////////////////////////////////Intercambios////////////////////////////////
         double insercionIter = 0;
+        double burbujaIter = 0;
         double quicksortIter = Math.pow(allInt.length,2); //allInt.length * (Math.log(allInt.length)); //Peor caso
-        double mergeIter = allInt.length * (Math.log(allInt.length));
+        double mergeIter =  allInt.length * (Math.log(allInt.length) / Math.log(2));
         ////////////////////////////////////////////////////////////////////
 
         if(bandera) {//ES EL MEJOR CASO ORDENADO
-            insercionIter = allInt.length;
+            insercionIter = 0;
+            //mergeIter=0;
+            quicksortIter = allInt.length;
+            burbujaIter = 0;
             insercion =allInt.length;
 
         }else{// PERO CASO ORDENADO ARBITRARIAMENTE O INVERSAMENTE
@@ -134,7 +138,7 @@ public class Controller implements Initializable {
         }
 
 
-        burbujaData = new AlphaData("Burbuja",burbuja,0,burbuja,0);
+        burbujaData = new AlphaData("Burbuja",burbuja,0,burbujaIter,0);
         insercionData = new AlphaData("Insercion",insercion,0,insercionIter,0);
         mergeData = new AlphaData("Merge",merge,0,mergeIter,0);
         quickData = new AlphaData("Quicksort",quicksort,0,quicksortIter,0);
